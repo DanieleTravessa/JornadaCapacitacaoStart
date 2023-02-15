@@ -34,7 +34,7 @@ User Function JsL1e32()
 
     // loop para comparar os arrays
     For nI := 1 to Len(aArray1)
-        If aArray1[i] = aArray2[i]
+        If aArray1[nI] = aArray2[nI]
             nIguais++ // incrementar a contagem de números iguais
         Endif
     Next

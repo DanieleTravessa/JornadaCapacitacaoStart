@@ -13,33 +13,19 @@ valor lido.                    |
 #INCLUDE "TOTVS.CH"
 
 User Function JsL1e22()
+    
+    Local nValor := 0
+    Local nI
 
-Local nBase      := ""
-Local nAltura    := ""
-Local nRetangulo := ""
+    // loop para ler o valor até que um valor entre 1 e 10 seja informado
+    While nValor < 1 .or. nValor > 10
+      nValor := Val(FwInputBox("Digite um valor inteiro entre 1 e 10: "))
+    Enddo
 
-//Insira a Base
-//Insira a Altura
-nRetangulo = val(nBase * nAltura)
+    // loop para escrever a tabuada de 1 a 10 do valor lido
+    For nI := 1 to 10
+        FwAlertInfo := (cValToChar(nValor) + " x " + cValToChar(nI) + " = " + cValToChar(nValor * nI), "Tabuada")
+    Next
 
-//Mostre nAntecessornRetangulo
+Return
 
-RETURN
-
-/*///Calcular e apresentar o valor do volume de uma lata de óleo, utilizando a fórmula: VOLUME = 3,14159 x R2 x ALTURA. 
-
-  LOCAL nV := 0, nAlt := 0, nR := 0
-
-  ACCEPT "Informe o raio da lata em metros: " TO nR
-  ACCEPT "Informe a altura da lata em metro: " TO nAlt
-
-  nR := Val(nR)
-  nAlt := Val(nAlt)
- 
-  nV := (3.1415*nR^2)*nAlt
- 
-  QOut("O volume da lata e: ", +AllTrim(Str(round(nV,2)),"m³"))//Função Round ("",n) para arredondar o valor. 
-  ?""
-
-RETURN nil
-/*/
