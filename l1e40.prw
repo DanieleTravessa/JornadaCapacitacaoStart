@@ -33,7 +33,7 @@
 /*/
 #INCLUDE "TOTVS.CH"
 
-User Function JsalTotal()
+User Function JsL1e40()
 
     Local cHrTrab  :=""
     Local nHrTrab  := 0
@@ -42,13 +42,10 @@ User Function JsalTotal()
     Local nIR      := 0
     Local nSIR
     Local nINSS    := 0
-
     Local nFGTS    := 0
-
     Local nDescont := 0
     Local nSalBruto:= 0
     Local nSalTot  := 0     
-
 
 // Solicitar o número de horas trabalhadas, e o salário por hora
     cHrTrab := FwInputBox("Informe o número de horas trabalhadas: ", cHrTrab)
@@ -78,12 +75,13 @@ User Function JsalTotal()
     nDescont := (nINSS + nIR)
     nSalTot := nSalBruto - nDescont
    
-// Mostrar o salário total
-    FwAlertInfo("|    Salário bruto ("+cSalHora+"*"+cHrTrab+"): R$" + Alltrim(Str(nSalBruto,10,2)) + "|"+ CRLF +;
-    "|                     ( – ) IR ("+ nIR +"%) : R$"+ nSIR + "                |" + CRLF +;
-    "|                    ( – ) INSS ( 10% ) : R$"+ nINSS + "               |" + CRLF +;
-    "|                       FGTS ( 11%) : R$"+ nFGTS + "                   |" + CLRF +;
-    "|                   Total de descontos : R$"+ nDescont + "             |" + CRLF +;
-    "|                    Salário Líquido : R$" +nSalTot+ "                 |";
-    , "Folha de Pagamento")
+// Mostrar a folha completa
+     
+    FwAlertInfo("Salário bruto (" + cSalHora + "*" + cHrTrab + "): R$" + AllTrim(Str(nSalBruto,10,2))+;
+        "( – ) IR (" + AllTrim(Str(nIR)) + "%) : R$" + AllTrim(Str(nSIR))+;
+        "( – ) INSS ( 10% ) : R$" + AllTrim(Str(nINSS))+ ;    
+        "FGTS ( 11%) : R$" + AllTrim(Str(nFGTS)) +;    
+        "Total de descontos : R$" + AllTrim(Str(nDescont))+;
+        "Salário Líquido : R$" + AllTrim(Str(nSalTot)), "Folha de Pagamento")
+
 Return

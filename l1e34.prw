@@ -5,8 +5,8 @@
 |--------------------------------------------------------------------------|
 |--------------------------------------------------------------------------|
 |Ex.34 - Faça um programa que receba a idade e o peso de sete pessoas.     |
-|Calcule e mostre:
-|o A quantidade de pessoas com mais de 90 quilos
+|Calcule e mostre:                                                         | 
+|o A quantidade de pessoas com mais de 90 quilos                           | 
 |o A média das idades das sete pessoas                                     |
 |--------------------------------------------------------------------------|
 
@@ -14,58 +14,29 @@
 
 #INCLUDE "TOTVS.CH"
 
-User Function JsL1e17()
+User Function JsL1e34()
 
-Local cEntrada := ''
-Local nSoma := 0
-Local nResultado     := 0
-Local nCont := 1
-Local lContinua := .T.
-Local cTitulo := 'Programa para calcular media de aluno'
+    Local nIdade
+    Local nPeso
+    Local nSomaIdade := 0
+    Local nContPeso := 0
+    Local nMediaIdade := 0
+    Local nI
 
-//Insira um numero
-While lContinua == .T.
-    nSoma := 0
-    For nCont := 1 to 2
-    cEntrada := '-1'
-    nAntecessor = val(nNumero - 1)
-    while val(cEntrada) < 0 .or. Val(cEntrada) > 10
-    cEntrada:=''
-    cEntrada := FwInputBox('Informe a Nota do Aluno: ', cEntrada)
-    ENDDO
-    nSoma += Val(cEntrada)
+    For nI := 1 to 7
+        nIdade := Val(FwInputBox("Digite a idade da pessoa "))
+
+        nPeso := Val(FwInputBox("Digite o peso da pessoa "))
+            
+        If nPeso > 90
+            nContPeso++
+        Endif
+    
+        nSomaIdade += nIdade
     Next
-    nResultado := nSoma / 2
 
-    FwAlertInfo("A media de alunos" + cvaltochar(nresultado), ctitulo)    
+    nMediaIdade := nSomaIdade / 7
 
-    cEntrada := ''
-    cEntrada := FwInputBox('Novo Calculo (S/N)? ', cEntrada)
-    If cEntrada := 'N'
-    lContinua := .F.
-    ENDIF
-    ENDDO
-
-RETURN
-user function calculaDados()
-local nIdade, nPeso, nSomaIdade := 0, nContPeso := 0, nMediaIdade := 0
-
-for i := 1 to 7
-    ? "Digite a idade da pessoa " + alltrim(str(i, 2, 0)) + ":"
-    nIdade := val(input())
-    
-    ? "Digite o peso da pessoa " + alltrim(str(i, 2, 0)) + ":"
-    nPeso := val(input())
-    
-    if nPeso > 90
-        nContPeso++
-    endif
-    
-    nSomaIdade += nIdade
-next
-
-nMediaIdade := nSomaIdade / 7
-
-? "Quantidade de pessoas com mais de 90 quilos: " + alltrim(str(nContPeso, 2, 0))
-? "Média das idades das sete pessoas: " + alltrim(str(nMediaIdade, 5, 2))
-return
+    FwAlertInfo(AllTrim(Str(nContPeso, 2, 0)), "Quantidade de pessoas com mais de 90 quilos: ")
+    FwAlertInfo(Alltrim(Str(nMediaIdade, 5, 2)), "Média das idades das sete pessoas: ")
+Return

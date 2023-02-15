@@ -15,7 +15,7 @@
 
 User Function JsL1e39()
 
-Local aNomes   := {"Daniele","Edson","Fabio","Gabriela","Gustavo F","Gustavo Q","Henrique","João","Lucas","Matheus","Muriel","Natan","Ruan","Stephani","Tamiris","Vinícius", }
+Local aNomes   := {"Daniele","Edson","Fabio","Gabriela","Gustavo F","Gustavo Q","Henrique","João","Lucas","Matheus","Muriel","Natan","Ruan","Stephani","Tamiris","Vinícius"}
 Local cSorteio := ""
 Local nSorteio := 0
 
@@ -24,6 +24,6 @@ nSorteio := Random(1,Len(aNomes))
 cSorteio := aNomes[nSorteio]
 
 //Mostra o nome sorteado
-FwAlertInfo(Alltrim(Str(cSorteio))+CLRF+"Você ganhou a chance de apresentar o próximo exercício!", "Parabéns!")
+FwAlertInfo(Alltrim(Str(cSorteio)) + ": Você ganhou a chance de apresentar o próximo exercício!", "Parabéns!")
 
 RETURN

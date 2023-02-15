@@ -13,15 +13,4 @@
 
 #INCLUDE "TOTVS.CH"
 
-User Function Antecessor()
 
-Local nDataDeNasc:= ""
-Local nIdade     := ""
-Local nIdadeDias := ""
-
-//Insira sua data de nascimento
-nIdade = DatadeNascimento-Ano
-
-//Mostre nIdadeDias
-
-RETURN

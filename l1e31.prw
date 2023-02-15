@@ -28,6 +28,8 @@ User Function JsArrcresc()
     
     aOrden := Asort(aValor)
 
-    FwAlertInfo(Str(nNegativo) + " valores negativos.", "Foram informados: ")
+    For nNum := 1 to 10
+        FwAlertInfo(cValtochar(aOrden[nNum]), "Ordem crescente")
+    Next
 
 RETURN

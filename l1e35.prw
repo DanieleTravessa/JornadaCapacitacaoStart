@@ -13,36 +13,34 @@
 
 #INCLUDE "TOTVS.CH"
 
-User Function JsL1e17()
+User Function JsL1e35()
 
-Local cEntrada := ''
-Local nSoma := 0
-Local nResultado     := 0
-Local nCont := 1
-Local lContinua := .T.
-Local cTitulo := 'Programa para calcular media de aluno'
+    Local cEntrada := ""
+    Local nSoma := 0
+    Local nResultado     := 0
+    Local nCont := 1
+    Local lContinua := .T.
 
 //Insira um numero
-While lContinua == .T.
-    nSoma := 0
-    For nCont := 1 to 2
-    cEntrada := '-1'
-    nAntecessor = val(nNumero - 1)
-    while val(cEntrada) < 0 .or. Val(cEntrada) > 10
-    cEntrada:=''
-    cEntrada := FwInputBox('Informe a Nota do Aluno: ', cEntrada)
+    While lContinua == .T.
+        
+        For nCont := 1 to 2
+        cEntrada := '-1'
+        nAntecessor = val(nNumero - 1)
+        while val(cEntrada) < 0 .or. Val(cEntrada) > 10
+        cEntrada:=''
+        cEntrada := FwInputBox('Informe a Idade da Pessoa: ', cEntrada)
     ENDDO
-    nSoma += Val(cEntrada)
-    Next
-    nResultado := nSoma / 2
+        nSoma += Val(cEntrada)
+        Next
+        nResultado := nSoma / 2
 
-    FwAlertInfo("A media de alunos" + cvaltochar(nresultado), ctitulo)    
-
-    cEntrada := ''
-    cEntrada := FwInputBox('Novo Calculo (S/N)? ', cEntrada)
-    If cEntrada := 'N'
-    lContinua := .F.
-    ENDIF
+        FwAlertInfo("A media das idades" + cvaltochar(nresultado), "Média das Idades")    
+    
+        cEntrada := FwInputBox("Digite zero para sair (0).", cEntrada)
+        If cEntrada == "0"
+            lContinua := .F.
+        ENDIF
     ENDDO
 
 RETURN

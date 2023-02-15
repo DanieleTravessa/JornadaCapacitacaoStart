@@ -16,28 +16,20 @@
 |--------------------------------------------------------------------------|
 
 /*/
-
+n
 #INCLUDE "TOTVS.CH"
 
-user function tabelaDescontos()
-local nValorCompra := 500
-local nPercentualDesconto := 1
-local nValorFinal := 0
+User Function JsL1e37()
+    
+    Local nVCompra := 500
+    Local nPercentual := 1
+    Local nVFinal := 0
 
-do while nPercentualDesconto <= 25
-    nValorFinal := nValorCompra - (nValorCompra * nPercentualDesconto / 100)
-    ? "Valor da compra: " + alltrim(str(nValorCompra, 12, 2)) + " - Percentual de desconto: " + alltrim(str(nPercentualDesconto, 2, 0)) + "% - Valor final: " + alltrim(str(nValorFinal, 12, 2))
-    nValorCompra += 100
-    nPercentualDesconto += 1
-enddo
-return
+    Do While nPercentual <= 25
+        nVFinal := nVCompra - (nVCompra * nPercentual / 100)
+        FwAlertInfo("Valor da compra: " + Alltrim(Str(nVCompra,12,2)) + " - Percentual de desconto: " + AllTrim(Str(nPercentual,2,0)) + "% - Valor final: " + AllTrim(Str(nVFinal,12,2)), "Desconto Progressivo!")
+        nVCompra += 100
+        nPercentual += 1
+    Enddo
+Return
 
-RETURN
-
-Explicação do código:
-
-Começamos definindo as variáveis nValorCompra, nPercentualDesconto e nValorFinal como locais e com valores iniciais de 500, 1 e 0, respectivamente.
-Em seguida, utilizamos um laço de repetição do while que vai executar enquanto o nPercentualDesconto for menor ou igual a 25.
-Dentro do laço, calculamos o valor final da compra com o desconto acumulado e exibimos as informações no formato pedido pelo exercício utilizando a função alltrim para formatar as strings.
-Por fim, incrementamos o valor da compra em 100 e o percentual de desconto em 1 para o próximo ciclo do laço.
-O código retorna a tabela de descontos no formato pedido pelo exercício.

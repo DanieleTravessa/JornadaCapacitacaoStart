@@ -8,20 +8,29 @@
 |aNumeros, verificar e escrever se existem números repetidos no array      | 
 |aNumeros e em que posições se encontram.                                  |
 |--------------------------------------------------------------------------|
-
 /*/
 
 #INCLUDE "TOTVS.CH"
 
-User Function Antecessor()
+User Function JsL1e33()
+    Local aNumeros := {} // criar um array vazio
+    Local nNumero := 0
+    Local nI
+    Local nJ
 
-Local aNumeros := ""
-Local aClonado := ""
-Local nIdadeDias := ""
+    // loop para ler 20 números
+    For nI := 1 to 20 
+        nNumero := Val(FwInputBox("Digite um número "))
+        aAdd(aNumeros, nNumero) // adicionar o número ao array
+    Next
 
-//Insira sua data de nascimento
-nIdade = DatadeNascimento-Ano
+    // loop para verificar números repetidos
+    For nI := 1 to Len(aNumeros) - 1
+        For nJ := nI + 1 to Len(aNumeros)
+            If aNumeros[nI] = aNumeros[nJ]
+                FwAlertInfo("O número " + cValToChar(aNumeros[nI]) + " está nas posições " + cValToCharn(nI) + " e " + cValToChar(nJ))
+            Endif
+        Next
+    Next
 
-//Mostre nIdadeDias
-
-RETURN
+Return
