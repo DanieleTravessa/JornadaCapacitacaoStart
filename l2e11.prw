@@ -31,23 +31,23 @@ User Function JsL2e11()
         
 Return
 
-//==> Versão: laço finito (para)*/
+//==> Versão: For
 //Aqui temos à estrutura, a variável com contador se iniciando simultaneamente. 
-/*Static Function u_For()
+Static Function u_For(nCont)
           
         For nCont:= 1 to 50
-            nNumero := Random(10,99)%99+1
-            aAdd(aNumeros, nNumero)
-        NEXT  //Volta para o início da estrutura até que a condição de saída seja cumprida
+            nNumero := Random(10,99)
+            aAdd(aNumero, nNumero)
+        Next  //Volta para o início da estrutura até que a condição de saída seja cumprida
            
-    MsgInfo (Imprime(),"-> *** A Contagem chegou ao final! ***")
+    ImprimA()
 
-Return*/
+Return
 
 //==> Versão: laço com While
 Static Function u_While()
     
-    Local nCont := 0
+    Local nCont := 1
 
     WHILE nCont <= 50 //Utilizando o While;
         nNumero := Random(10,99) //É atribuída à variável um valor aleatório
@@ -55,19 +55,20 @@ Static Function u_While()
         nCont++
     ENDDO
          
-    //MsgInfo(Imprime(), "*** A Contagem chegou ao final! ***")
-    
-    For nCont := 1 to 50
-        FwAlertInfo(cValtochar(aNumero[nCont]), "*** A Contagem chegou ao final! ***")
-    Next
+    ImprimA() 
+
 Return
-/*
-  Static Function Imprime(aNumero)
+
+Static Function ImprimA()
 
     Local nCont:= 0
+    Local cMsg := ""
       
     For nCont := 1 to Len(aNumero)
-        FwAlertInfo(cValtochar(aNumero[nCont]), "")
+        cMsg += cValtochar(aNumero[nCont]) + " , "            
     Next
+
+    FwAlertSuccess(cMsg, "*** A Contagem chegou ao final! ***")
 Return
-*/
+
+//minha primeira função: imprimir e jogar num quadro 

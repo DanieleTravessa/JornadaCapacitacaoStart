@@ -4,54 +4,29 @@
 |Player: Daniele Travessa Brito                           GM: Muriel Zounar|
 |--------------------------------------------------------------------------|
 |--------------------------------------------------------------------------|
-|Ex.14 - Faça um programa que calcule a somatória dos "n" primeiros números naturais pares ou ímpares. O usuário informará através de digitação a quantidade de números desejada ("n") e escolherá entre par ou ímpar.Escreva um algoritmo para ler 2 valores e se o segundo valor      |
-|informado for ZERO, deve ser lido um novo valor, ou seja, para o segundo  |
-|valor não pode ser aceito o valor zero. Imprimir o resultado da divisão do|
-|primeiro valor lido pelo segundo valor lido.                              |
-|--------------------------------------------------------------------------|
-/*/
+|Ex.14 - Faça um programa que calcule a somatória dos "n" primeiros números|
+|naturais pares ou ímpares. O usuário informará através de digitação a     |
+|quantidade de números desejada ("n") e escolherá entre par ou ímpar.      |
+|--------------------------------------------------------------------------|/*/
 
 #INCLUDE "TOTVS.CH"
 
-User Function Jsl1e14()
-
-    Local nNum1 := 0
-    Local nNum2 := 0
-
-//Insira um numero
-    nNum1 := Val(FwInputBox("Insira o primeiro valor: ", nNum1))
-
-
-    While nNum2 == 0
-        nNum2 := Val(FwInputBox("Insira o segundo valor: ", nNum2))
-    End
-
-    FwAlertInfo("O valor da divisao é: " + AllTrim(STR(nNum1/nNum2)), "Valor da divisão")
-
-RETURN
-
-/*60.Faça um programa que calcule a somatória dos "n" primeiros números naturais pares ou ímpares. 
-O usuário informará através de digitação: a quantidade de números desejada ("n") e escolhe entre par o ímpar.*/
-
-FUNCTION MAIN()
+User Function Jsl2e14()
 
     LOCAL nNumero := 0, nSoma := 0, nLimite := 0, cIP := "", cPI := ""
-    ACCEPT "Insira quantos numeros naturais quer calcular : " to nLimite
-    ACCEPT "Quer calcular os valores pares ou impares? (P/I) " to cIP
+
+    nLimite := Val(FwInputBox("Insira quantos numeros naturais quer calcular : "))
+    cIp := Upper(FwInputBox("Quer calcular os valores pares ou impares? (P/I)"))
 
    
     WHILE ISDIGIT(nLimite) = .F. // Validacao para saber se o numero digitado eh inteiro e positivo
-            ACCEPT "Valor invalido, digite aqui um numero inteiro positivo: " to nLimite
+            nLimite := Val(FwInputBox("Valor invalido, digite aqui um numero inteiro positivo: "))
     ENDDO
-
-    nLimite := Val(nLimite)
-    cIP := UPPER(cIP)
-
-
+ 
     WHILE nNumero < nLimite 
         IF cIP == "P"
         nNumero := nNumero + 2
-        nSoma := nSoma + nNumero
+        nSoma += nNumero
         cPI := "Pares"
         ELSEIF cIP == "I"
         nNumero := nNumero + 1
@@ -59,7 +34,6 @@ FUNCTION MAIN()
         cPI := "Impares"
         ENDIF
     ENDDO
-    ?"A somatoria dos", nLimite, "primeiros numeros naturais", cPI, "e: ", +AllTrim((Str(nSoma)))
-    ?""
-
-RETURN NIL
+    FwAlertInfo(AllTrim(Str(nSoma)), "A somatoria dos " + AllTrim(Str(nLimite)) + " primeiros números naturais" + cPI + "é: ")
+    
+    RETURN

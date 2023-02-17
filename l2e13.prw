@@ -4,112 +4,54 @@
 |Player: Daniele Travessa Brito                             GM: Muriel Zounar|
 |----------------------------------------------------------------------------|
 |----------------------------------------------------------------------------|
-| Ex.13 - Elaborar um programa que exiba na tela automaticamente todos os múltiplos de um determinado número informado pelo usuário, existentes entre 1 e um limite, que também deverá ser informado pelo usuário. Faça com apenas uma estrutura de repetição (For / While), antes de desenvolver, analise qual será a melhor opção.Faça um algoritmo para ler: a descrição do produto (nome), a       |
-|quantidade adquirida e o preço unitário.                                    |
-|Calcular e escrever o total (total = quantidade adquirida * preço unitário),|
-|o desconto e o total a pagar (total a pagar = total - desconto), sabendo-se |
-|que:                                                                        |   
-|      o Se quantidade <= 5 o desconto será de 2%                            |
-|      o Se quantidade > 5 e quantidade <= 10 o desconto será de 3%          |
-|      o Se quantidade > 10 o desconto será de 5%                            |
-|----------------------------------------------------------------------------|
-
-/*/
+|E13 - Elaborar um programa que exiba na tela automaticamente todos os       |
+|múltiplos de um determinado número informado pelo usuário, existentes entre |
+|1 e um limite, que também deverá ser informado pelo usuário. Faça com apenas|
+|uma estrutura de repetição (For / While), antes de desenvolver, analise qual|
+|será a melhor opção.                                                        |
+|----------------------------------------------------------------------------|/*/
 
 #INCLUDE "TOTVS.CH"
 
-User Function JsL1e13()
+User Function JsL2e13()
 
-    Local cDesc := "" // descrição do produto
-    Local cQtde := ""
-    Local nQtde := 0 // quantidade adquirida
-    Local cPreUni
-    local nPreUni := 0 // preço unitário
-    local nTotal := 0 // total
-    local nDesconto := 0 // desconto
-    local nTotAPagar := 0 // total a pagar
+    Private nNumero := 0, nMultiplo := 0, nLimite := 0, nOpt := 0
 
-// ler os valores do usuário
-    cDesc := FwInputBox("Digite a descrição do produto: ", cDesc)
-    cQtde := FwInputBox("Digite a quantidade adquirida: ", cQtde)
-    cPreUni := ("Digite o preço unitário: ", cPreUni)
-
-    nPreUni := Val(cPreUni)
-    nQtde := Val(cQtde)
+    nLimite := Val(FwInputBox("Informe o valor limite: "))
+    nMultiplo := Val(FwInputBox("Informe o fator de multiplicacao desejado: "))
     
-// calcular o total
-    nTotal := nQtde * nPreUni
+    nOpt := Aviso("Sorteio de Números", "Escolha uma opção de sorteio", {"**FOR**", "**WHILE**"}, 1,,,,,)
 
-// calcular o desconto de acordo com a quantidade adquirida
-    If nQtde <= 5
-        nDesconto := (nTotal*2)/100
-    Elseif nQtde > 5 .and. nQtde <=10
-        nDesconto := (nTotal*3)/100
-    Else
-        nDesconto := (nTotal * 5)/100
-    Endif 
-
-// calcular o total a pagar
-    nTotAPagar := nTotal - nDesconto
-
-// exibir os resultados
-    FwAlertInfo("Descrição do produto: " + cDesc)
-    FwAlertInfo("Quantidade adquirida: " + Alltrim(Str(nQtde)))
-    FwAlertInfo("Preço unitário: " + Alltrim(Str(nPreUni)))
-    FwAlertInfo("Total: " + Alltrim(Str(nTotal)))
-    FwAlertInfo("Desconto: " + Alltrim(Str(nDesconto)))
-    FwAlertInfo("Total a pagar: " + Alltrim(Str(nTotAPagar)))
+    If nOpt == 1
+        u_For()
+    
+    ELSEIF nOpt == 2
+        u_While()    
+    EndIf
+        
 Return
-
-/*56b.Elaborar um programa que exiba na tela automaticamente todos os múltiplos de um determinado número informado pelo usuário, 
-existentes entre 1 e um limite, que também deverá ser informado pelo usuário. 
-Fazer duas versões da solução utilizando diferentes estruturas de repetição, a sua escolha.  
-Utilizar obrigatoriamente o laço finito (para) para esta solução. 
-==> Versão: laço pré-teste (enquanto)*/
-
-FUNCTION MAIN()
-
-    Local nNumero := 0, nMultiplo := 0, nLimite := 0
-
-    Accept "Informe o valor limite: " to nLimite
-    Accept "Informe o fator de multiplicacao desejado: " to nMultiplo
     
-    nLimite := Val(nLimite)
-    nMultiplo := Val(nMultiplo)
+Static Function u_While()
+    Local nNumero := 0, cMsg := ""
 
     WHILE nNumero <= nLimite ///*No laço finito, a estrutura e a variavel com contador se iniciam simultaneamente.
-        IF nNumero%(nMultiplo)=0
-        ?nNumero          //O programa exibe o valor contido na variável
-        nNumero := nNumero + nMultiplo
+        IF Mod(nNumero,nMultiplo) == 0
+            cMsg += cValToChar(nNumero) + " , "  //MsgInfo(Str(nNumero))         //O programa exibe o valor contido na variável
         ENDIF
     ENDDO
-    QOUT("-> *** Esses sao os multiplos de", nMultiplo, "ate", +AllTrim(Str(nLimite))," ***")
-    ?""
+    FwAlertInfo(cMsg,"Esses são os múltiplos de " + AllTrim(Str(nMulti)) + " até " +AllTrim(Str(nLimite)))
 
-RETURN NIL
+RETURN
 
-/*56.Elaborar um programa que exiba na tela automaticamente todos os múltiplos de um determinado número informado pelo usuário, 
-existentes entre 1 e um limite, que também deverá ser informado pelo usuário. 
-Fazer duas versões da solução utilizando diferentes estruturas de repetição, a sua escolha.  
-Utilizar obrigatoriamente o laço finito (para) para esta solução. 
-==> Versão: laço finito (para)*/
 
-FUNCTION MAIN()
+Static Function u_For(nLimite, nMultiplo)       
+    Local nNumero := 0, cMsg := ""
 
-    Local nNumero := 0, nMultiplo := 0, nLimite := 0
-
-    Accept "Informe o valor limite: " to nLimite
-    Accept "Informe o fator de multiplicacao desejado: " to nMultiplo
-    
-    nLimite := Val(nLimite)
-    nMultiplo := Val(nMultiplo)
-
-    FOR nNumero:= 1 to nLimite ///*No laço finito, a estrutura e a variavel com contador se iniciam simultaneamente.
-        IF nNumero%(nMultiplo)=0
-        ?nNumero          //O programa exibe o valor contido na variável
+    FOR nNumero := 1 to nLimite 
+        IF Mod(nNumero,nMultiplo) == 0
+            cMsg += cValToChar(nNumero) + " , "
         ENDIF
     NEXT
-    QOUT("-> *** Esses sao os multiplos de", nMultiplo, "ate", +AllTrim(Str(nLimite))," ***")
-    ?""
-
-RETURN NIL
+    FwAlertInfo(cMsg,"Esses são os múltiplos de " + AllTrim(Str(nMulti)) + " até " +AllTrim(Str(nLimite)))      
+RETURN
+ 
