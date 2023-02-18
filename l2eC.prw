@@ -32,21 +32,19 @@
 
 //Jogo Adivinha o número.
 User Function JsL2eC()
-nOpt := Aviso("**Jogo Adivinhe o Número**", "Tente acertar o número com o mínimo de tentativas!", {"**Round 1**", "**Round 2**"}, 1,,,,,)
+nOpt := Aviso("**Jogo Adivinhe o Número**", "Tente acertar o número com o mínimo de tentativas!", {"**Level 1**", "**Level 2**"}, 1,,,,,)
 
     If nOpt == 1
-        u_Round1()
+        f_Level1()
     
     ElseIf nOpt == 2
-        u_Round2()
+        f_Level2()
     
     EndIf
        
 Return
-    
 
-
-Static Function u_Round1()
+Static Function f_Level1()
     Local nN, nChute := 0, nTent := 0
 
     nN := Random(0,100)
@@ -71,33 +69,33 @@ Static Function u_Round1()
 Return
 
 /*Jogo Adivinha o número - parte 2: */
-Static Function u_Round2()
+Static Function f_Level2()
 
-    Local nN, nChute := 0, nTent
+    Local nN, nChute := 0, nTent := 0
 
     nN := Random(0,100)
     While nChute != nN
 
-        nChute := Val(FwInputBox("Digite um numero (de 1 a 100): "))
+        nChute := Val(FwInputBox("Digite um número (de 1 a 100): "))
         
         If(nChute == nN)
-            FwAlertSuccess("O total de erro foi de: " + alltrim(str(nTent)) + " tentativas.", "Parabéns, você acertou!!")
+            FwAlertSuccess("O total de erro foi de: " + Alltrim(Str(nTent)) + " tentativas.", "Parabéns, você acertou!!")
         ElseIf (nChute > nN)
-            FwAlertError("O valor digitado é mais alto, tente novamente.")
-            nTent +=1
+            FwAlertError("Tente um valor mais baixo!")
+            nTent+=1
         Else
-            FwAlertError("O valor digitado é baixo, tente novamente.")
-            nTent +=1
+            FwAlertError("Tente um valor mais alto!")
+            nTent+=1
         EndIf      
     EndDo
     
     If nTent <=5
-        FwAlertSuccess("Voce e muito bom, acertou em ", +AllTrim(STR(nTent)),"tentativas")
+        FwAlertSuccess("Voce é muito bom, acertou em ", +AllTrim(STR(nTent)),"tentativas")
     ElseIf nTent > 5 .and. nTent <= 9
-        FwAlertSuccess("Voce e bom, acertou em ", +AllTrim(STR(nTent)),"tentativas")
+        FwAlertSuccess("Voce é bom, acertou em ", +AllTrim(STR(nTent)),"tentativas")
     ElseIf nTent > 9 .and. nTent <= 13
         FwAlertInfo("Voce é mediano, acertou em ", +AllTrim(STR(nTent)),"tentativas")
     Elseif nTent > 13
-        FwAlertError("Voce e muito fraco, acertou em ", +AllTrim(STR(nTent)),"tentativas")
+        FwAlertError("Voce é muito fraco, acertou em ", +AllTrim(STR(nTent)),"tentativas")
     ENDIF
 RETURN
