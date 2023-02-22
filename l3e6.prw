@@ -14,36 +14,49 @@
 #INCLUDE 'TOPCONN.CH'
 #INCLUDE 'TBICONN.CH'
 
-
-User Function BusProdSQL()
-    Local aArea   := GetArea()
-    Local cAlias  := GetNextAlias()
-    Local cQuery  := ''
-    Local cCodigo := ''
-    Local cDescri := ''
+User Function JsL3e6()
+    Local cQuery  := ""
+    Local cCod := ""
     Local nValor := 0
-    cCodigo := alltrim(FwInPutBox("Digite o código do produto: "))
+    Local lRepete := .T.
+    
+    cCod := alltrim(FwInPutBox("Digite o código do produto: "))
 
-    rpcsetenv("99", "01")
+    RpcSetEnv("99", "01")
 
-    cQuery := 'SELECT trim(B1_COD) as Codigo, B1_DESC, B1_PRV1' + CRLF
-    cQuery += 'FROM ' + RetSqlName('SB1') + ' SB1'  + CRLF
-    cQuery += "WHERE B1_COD = '" + cCodigo + "'" + "and D_E_L_E_T_ <> '*'" 
+     BEGINSQL Alias "SB1"
+        SELECT 
+            B1_COD,
+            B1_DESC,
+            B1_PRV1
+        FROM 
+            %table:SB1% SB1
+        WHERE
+            D_E_L_E_T_ <>'*' AND
+            B1_COD = 'cCod' 
+    ENDSQL
+    
     TCQUERY cQuery ALIAS &(cAlias) NEW
-    &(cAlias)->(DbGoTop())
 
-    if ALLTRIM(&(cAlias)->(Codigo)) == ''
-       FwAlertInfo("não possui itens com este código no sistema") 
-       RETURN
-    ENDIF
-
-    while &(cAlias)->(!EOF())
-        cDescri := &(cAlias)->(B1_DESC)
+        cDesc := &(cAlias)->(B1_DESC)
         nValor  := &(cAlias)->(B1_PRV1)
-        &(cAlias)->(DbSkip())
-    end
+        cCod := &(Alias)->(B1_COD)
+    
+    While lRepete
+        
+        &(cAlias)->(DbGoTop())
 
-        FwAlertInfo('Código: ' + cCodigo + CRLF + 'Descrição: ' + cDescri + CRLF + 'Preço de venda: ' + ALLTRIM(STR(nValor)), 'Dados do Produto')
-        &(cAlias)->(DbCloseArea())
-        RestArea(aArea)
+        If ALLTRIM(&(cAlias)->(Codigo)) == " "
+            FwAlertInfo("não possui itens com este código no sistema") 
+            
+        Else 
+            FwAlertInfo('Código: ' + cCod + CRLF + 'Descrição: ' + cDescri + CRLF + 'Preço de venda: ' + ALLTRIM(STR(nValor)), 'Dados do Produto')
+            &(cAlias)->(DbCloseArea())
+               
+        EndIF   
+        lRepete := MsgYesNo("Deseja consultar outro código? ", "Consulta de código") 
+    EndDo
+
+    RpcClearEnv()
+
 Return 

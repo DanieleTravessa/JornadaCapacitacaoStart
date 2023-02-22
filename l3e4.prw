@@ -13,13 +13,12 @@
 #INCLUDE 'TOPCONN.CH'
 #INCLUDE 'TBICONN.CH'
 
+User Function JsL3e4()
 
-User Function L3_E4()
-    Local cDes   := ''
-    LOCAL cGrup  := ''
-    Local cMsg   := ''
+    Local cDesc   := ""
+    LOCAL cGrp  := ""
+    Local cMsg   := ""
     Local nCont  := 1
-
 
     rpcsetenv("99", "01")
 
@@ -27,34 +26,27 @@ User Function L3_E4()
         SELECT 
             B1_DESC,
             B1_GRUPO
-        FROM %table:sb1% SB1
-        where D_E_L_E_T_ <>'*'
+        FROM 
+            %table:SB1% SB1
+        WHERE
+            D_E_L_E_T_ <>'*'
     ENDSQL
 
-
-
     while SB1->(!EOF())
-        cDes  := SB1->B1_DESC
-        cGrup := SB1->B1_GRUPO
+        cDesc  := SB1->B1_DESC
+        cGrp := SB1->B1_GRUPO
 
-        IF cGrup == '02  '
-            cMsg += 'produto ' +Alltrim(str(nCont))+' : ' + cDes + CRLF
-            cMsg += '------------------------------' + CRLF + CRLF
+        IF cGrp == "G002" //Grupo de Produtos *Películas*
+            cMsg += '----------------------------------------------------------' + CRLF
+            cMsg += "  Produto " +Alltrim(str(nCont))+" : " + cDesc + CRLF
+            cMsg += '----------------------------------------------------------' + CRLF
             nCont++
         ENDIF
-
-        if nCont == 10
-        FwAlertInfo(cMsg, 'Dados dos Clientes')
-        nCont := 0
-        cMsg  := ''
-        endif
-
+       
         SB1->(DBSKIP())
-    end
+    EndDo
+    
+     FwAlertInfo(cMsg, "Produtos pertencentes ao Grupo Películas")
 
-    if nCont > 0
-        FwAlertInfo(cMsg, 'Dados dos Clientes')
-    endif
-
-    SB1->(DBCLOSEAREA())
+    RpcClearEnv()
 Return

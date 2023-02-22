@@ -19,11 +19,11 @@ User Function Jsl3e14()
     While nI < 5
       nNumeros := Val(FwInputBox("Insira um número:"))
       Aadd(aInteiros, nNumeros)
-      cNumInt += AllTrim(Str(nNumeros)) + ","
+      cNumInt += AllTrim(Str(nNumeros)) + " "
     nI++
     EndDo
 
-    FwAlertInfo(cNumInt)
+    FwAlertInfo(cNumInt, "Os números inseridos foram: ")
 
 Return
 

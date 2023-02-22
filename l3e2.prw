@@ -13,7 +13,7 @@
 #INCLUDE 'TOPCONN.CH'
 #INCLUDE 'TBICONN.CH'
 
-User Function L3_E2()
+User Function JsL3e2()
     Local aArea  := GetArea()
     Local cPod   := ''
     LOCAL cNota  := ''

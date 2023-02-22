@@ -13,7 +13,7 @@
 #INCLUDE 'TOPCONN.CH'
 #INCLUDE 'TBICONN.CH'
 
-User Function Preco()
+User Function JsL3e12()
 
     Local aArea      := GetArea() // área atual da tabela
     Local cAlias     := GetNextAlias()

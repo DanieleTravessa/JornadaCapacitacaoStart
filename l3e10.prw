@@ -13,7 +13,7 @@
 #INCLUDE 'TOPCONN.CH'
 #INCLUDE 'TBICONN.CH'
 
-USER FUNCTION L3_E10()
+USER FUNCTION JsL3e10()
 
     Local aArea  := GetArea()
     Local cAlias := GetNextAlias()

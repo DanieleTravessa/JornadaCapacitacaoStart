@@ -20,7 +20,7 @@
 User Function Jsl3e1()
     Local aArea   := GetArea()
     Local cPedido := "", cFornecedor := "F00004", cLoja := "01"
-    Local nCont := 0
+    Local nCont := 1
 
 
   PREPARE ENVIRONMENT EMPRESA '99' FILIAL '01' TABLES 'SC7' MODULO 'COM'
@@ -31,7 +31,7 @@ User Function Jsl3e1()
     If DbSeek(xFilial("SC7") + cFornecedor + cLoja) //cFornecedor := SC7->C7_FORNECE //cLoja := SC7->C7_LOJA
       While SC7->(!EOF())            
         If SC7->C7_FORNECE == cFornecedor
-        cPedido += AllTrim(SC7->C7_NUM)+";"+CRLF //A variável cCodigo recebe o conteúdo C7_NUM
+        cPedido += "Pedido " +Str(nCont)+ ": " + AllTrim(SC7->C7_NUM)+";"+CRLF //A variável cCodigo recebe o conteúdo C7_NUM
         nCont++
         Else
           Exit
@@ -39,9 +39,9 @@ User Function Jsl3e1()
         
         DbSkip()
       EndDo
-    
-    FwAlertInfo("Pedido " +Str(nCont)+ cCodigo )
     EndIf
+
+    FwAlertInfo(cPedido)
 
     DbCloseArea()
     RestArea(aArea)

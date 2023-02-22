@@ -30,13 +30,13 @@ User Function Jsl3e19()
     IF Substr(cFrase, nCel, 1) == "E"
       nE++
     EndIf
-    IF Substr(cFrase, nCel) == "I"
+    IF Substr(cFrase, nCel, 1) == "I"
       nI++
     EndIf
-    IF Substr(cFrase, nCel) == "O"
+    IF Substr(cFrase, nCel, 1) == "O"
       nO++
     EndIf
-    IF Substr(cFrase, nCel) == "U"
+    IF Substr(cFrase, nCel, 1) == "U"
       nU++
     ENDIF
 NEXT

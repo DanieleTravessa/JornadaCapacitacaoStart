@@ -14,12 +14,11 @@
 #INCLUDE 'TBICONN.CH'
 
 
-User Function L3_E5()
-    Local cDes   := ''
-    LOCAL cCod   := ''
-    Local cMsg   := ''
-    Local nCont  := 1
-
+User Function JsL3e5()
+    Local cDesc  := ""
+    LOCAL cCod   := ""
+    Local cMsg   := ""
+    
 //    PREPARE ENVIRONMENT EMPRESA '99' FILIAL '01' TABLES 'SB1' MODULO 'COM'
     rpcsetenv("99", "01")
 
@@ -27,28 +26,24 @@ User Function L3_E5()
         SELECT 
             B1_COD,
             B1_DESC
-        FROM %table:sb1% SB1
-        where D_E_L_E_T_ <>'*'
-        order by b1_Desc desc 
+        FROM
+            %table:sb1% SB1
+        WHERE 
+            D_E_L_E_T_ <>'*'
+        ORDER by
+            B1_DESC DESC 
     ENDSQL
 
   while SB1->(!EOF())
     cCod := SB1->B1_COD
-    cDes := SB1->B1_DESC
-    cMsg += 'Código: ' + cCod + CRLF + 'Nome: ' + cDes + CRLF 
-    cMsg += '------------------------------' + CRLF + CRLF
-
-    if nCont == 10
-      FwAlertInfo(cMsg, 'Dados dos Clientes')
-      nCont := 0
-      cMsg  := ''
-    endif
+    cDesc := SB1->B1_DESC
+    cMsg += " | Cód: " + cCod + " ||  Nome: " + cDesc + CRLF 
+    cMsg += "-------------------------------------------------------------------------" + CRLF
 
     SB1->(DBSKIP())
   ENDDO
+  
+  FwAlertInfo(cMsg, "Produtos Cadastrados")
 
-  if nCont > 0
-    FwAlertInfo(cMsg, 'Dados dos Clientes')
-  endif
- SB1->(DBCLOSEAREA())
+  RpcClearEnv()
 Return

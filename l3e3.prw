@@ -12,7 +12,7 @@
 #INCLUDE 'TOPCONN.CH'
 #INCLUDE 'TBICONN.CH'
 
-User Function PedidoDeVenda()
+User Function JsL3e3()
     Local aArea := GetArea(), cAlias := GetNextAlias()
     Local cMsg  := '', cQuery   := ''
 

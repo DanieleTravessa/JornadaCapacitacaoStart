@@ -12,7 +12,7 @@
 #INCLUDE 'TBICONN.CH'
 #INCLUDE 'TOPCONN.CH'
 
-User Function FornecedoresSP()
+User Function JsL3e11()
 
 	Local aArea := GetArea(), cAlias := GetNextAlias()
 	Local cArmazena := '', cQuery := ''
@@ -24,7 +24,7 @@ User Function FornecedoresSP()
 	TCQUERY cQuery ALIAS &(cAlias) NEW
 
 	while &(cAlias)->(!EOF())
-		cArmazena 	+= (&(cAlias)->(A2_NOME)) + CRLF + '______________' + CRLF + CRLF
+		cArmazena 	+= (&(cAlias)->(A2_NOME)) + CRLF + '_________________________________________________' + CRLF + CRLF
 		&(cAlias)->(DbSkip())
 	end
 

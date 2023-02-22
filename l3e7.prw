@@ -14,7 +14,7 @@
 #INCLUDE 'TBICONN.CH'
 
 
-User Function L3_E7()
+User Function JsL3e7()
     Local aArea   := GetArea()
     Local cAlias  := GetNextAlias()
     Local cQuery  := ''
