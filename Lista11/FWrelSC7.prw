@@ -8,7 +8,7 @@
 #DEFINE MaxLine 550
 
 /*/{Protheus.doc} User Function FWrepSA2
-    (Relatório da tabela SC7 usando a classe FWmsPrinter - Lista11 Ex5)
+    (RelatÃ³rio da tabela SC7 usando a classe FWmsPrinter - Lista11 Ex5)
     @type  Function
     @author Daniele Travessa
     @since 14/04/2023
@@ -18,9 +18,9 @@ User Function FWrelSC7()
     Local cAlias := GeraCons()
 
     If !Empty(cAlias)
-    Processa({||MontaRep(cAlias)}, 'Aguarde...', 'Imprimindo relatório...', .F.)
+    Processa({||MontaRep(cAlias)}, 'Aguarde...', 'Imprimindo relatÃ³rio...', .F.)
     else
-        FwAlertError('Nenhum registro encontrado','Atenção!')
+        FwAlertError('Nenhum registro encontrado','AtenÃ§Ã£o!')
     endif
 
 Return
@@ -84,11 +84,11 @@ Static Function Cabecalho()
     oPrint:Say(45,330,'Pedido de Compras', oFont16,,PRETO)
     //oPrint:Line(nLinha,15,nLinha,800,/**/,'-6')
     nLinha := 75
-    oPrint:Say(nLinha,20,'NÚMERO', oFont12,,PRETO)
-    oPrint:Say(nLinha,80,'DATA EMISSÃO', oFont12,,PRETO)
+    oPrint:Say(nLinha,20,'NÃšMERO', oFont12,,PRETO)
+    oPrint:Say(nLinha,80,'DATA EMISSÃƒO', oFont12,,PRETO)
     oPrint:Say(nLinha,180,'FORNECEDOR', oFont12,,PRETO)
     oPrint:Say(nLinha,480,'LOJA', oFont12,,PRETO)    
-    oPrint:Say(nLinha,585,'CONDIÇÃO DE PAGAMENTO', oFont12,,PRETO)
+    oPrint:Say(nLinha,585,'CONDIÃ‡ÃƒO DE PAGAMENTO', oFont12,,PRETO)
     
     nLinha += 5
 
@@ -101,7 +101,7 @@ Static Function Cabecalho()
     oPrint:Say(135,330,'Itens do Pedido', oFont16,,PRETO)
 
     oPrint:Say(nLinha,020,'CODIGO',      oFont12,,PRETO)
-    oPrint:Say(nLinha,080,'DESCRIÇÃO ',  oFont12,,PRETO)
+    oPrint:Say(nLinha,080,'DESCRIÃ‡ÃƒO ',  oFont12,,PRETO)
     oPrint:Say(nLinha,280,'QDE PEDIDA ', oFont12,,PRETO)
     oPrint:Say(nLinha,480,'VALOR UNIT.', oFont12,,PRETO)
     oPrint:Say(nLinha,585,'VALOR TOTAL', oFont12,,PRETO)
@@ -113,7 +113,7 @@ Static Function Cabecalho()
     nLinha += 20
 
     oPrint:Say(520, 015, 'Total do Pedido: ', oFont10,, PRETO)
-    oPrint:Say(520, 400, 'Total de Páginas: ', oFont10,, PRETO)
+    oPrint:Say(520, 400, 'Total de PÃ¡ginas: ', oFont10,, PRETO)
     nLinha := 0
 Return
 
@@ -196,8 +196,8 @@ Static Function VeriQuebLn(cString, nLineTam, nCol)
     If nQtdLine > 1
         lTemQbra := .T.
         For nI := 1 to nQtdLine
-            // A função MemoLine copia a quantidade de caracteres de acordo com o tamanho definido em "nLineTam" e atribui o valor em "cLinha", fazendo isso para cada linha.
-            // Obs: A quantidade de linhas necessárias foi definida pela função MLCount
+            // A funÃ§Ã£o MemoLine copia a quantidade de caracteres de acordo com o tamanho definido em "nLineTam" e atribui o valor em "cLinha", fazendo isso para cada linha.
+            // Obs: A quantidade de linhas necessÃ¡rias foi definida pela funÃ§Ã£o MLCount
             cLinha := MemoLine(cString, nLineTam, nI) 
             oPrint:Say(nLinha, nCol, cLinha, oFont10,, nCor)
             nLinha += 10
@@ -210,7 +210,7 @@ Static Function VeriQuebLn(cString, nLineTam, nCol)
     Endif
 Return
 
-//função que faz quebra de página
+//funÃ§Ã£o que faz quebra de pÃ¡gina
 Static Function VeriQuebPg(nMax)
 
     If nLinha > nMax
