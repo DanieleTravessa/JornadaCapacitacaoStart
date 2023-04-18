@@ -41,7 +41,8 @@ Static Function Imprime(oReport, cAlias)
 	Local oSection1 := oReport:Section(1)
 	Local oSection2 := oSection1:Section(1)
 	Local nTotReg		:= 0
-	Local cQuery		:= GeraQuery()
+	Local cQuery		:= GeraQuery()        
+    Local cUltimo := ''   
 	
 	DBUseArea(.T., 'TOPCONN', TcGenQry(/**/,/**/, cQuery), cAlias, .T., .T.)
 	
@@ -61,14 +62,24 @@ Static Function Imprime(oReport, cAlias)
 		If oReport:Cancel()
 			Exit
 		EndIf
+        If AllTrim(cUltimo) <> AllTrim((cAlias)->(C7_NUM))
+            If !Empty(cUltimo)
+				oSection2:Finish()
+				oSection1:Finish()
+            	oReport:EndPage()
+            EndIf
+			oSection1:Init()
+			oSection1:Cell('Numero'):SetValue((cAlias)->C7_NUM)		
+			oSection1:Cell('Data Emissao'):SetValue((cAlias)->C7_EMISSAO)		
+			oSection1:Cell('Fornecedor'):SetValue((cAlias)->C7_FORNECE)			
+			oSection1:Cell('Loja'):SetValue((cAlias)->C7_LOJA)
+			oSection1:Cell('Cond Pagto'):SetValue((cAlias)->C7_COND)
+			oSection1:PrintLine()
+			cUltimo := Alltrim((cAlias)->C7_NUM)
+            //nPag++
+			oSection2:Init()
+		EndIf
 
-		oSection1:Cell('Numero'):SetValue((cAlias)->C7_NUM)		
-		oSection1:Cell('Data Emissao'):SetValue((cAlias)->C7_EMISSAO)		
-		oSection1:Cell('Fornecedor'):SetValue((cAlias)->C7_FORNECE)			
-		oSection1:Cell('Loja'):SetValue((cAlias)->C7_LOJA)
-		oSection1:Cell('Cond Pagto'):SetValue((cAlias)->C7_COND)
-		oSection1:PrintLine()
-		
 		oSection2:Cell('C7_PRODUTO'):SetValue((cAlias)->C7_PRODUTO)		
 		oSection2:Cell('C7_DESCRI'):SetValue((cAlias)->C7_DESCRI)		
 		oSection2:Cell('C7_QUANT'):SetValue((cAlias)->C7_QUANT)				
@@ -91,5 +102,5 @@ Static Function GeraQuery()
 	Local cQuery := ''
 	cQuery += 'SELECT C7_NUM, C7_EMISSAO, C7_FORNECE, C7_LOJA, C7_COND, C7_PRODUTO, C7_DESCRI, C7_QUANT, C7_PRECO, C7_TOTAL' + CRLF
 	cQuery += 'FROM ' + RetSqlName('SC7') + ' SC7' + CRLF
-	cQuery += "WHERE D_E_L_E_T_= ' '" 
-Return cQuery
+	cQuery += "WHERE D_E_L_E_T_= ' ' AND C7_NUM != ' '"
+Return cQuery  
